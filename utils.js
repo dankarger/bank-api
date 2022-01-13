@@ -120,7 +120,8 @@ const transfer = (idGiver, idReceiver , amount)=> {
             if((user.cash + user.credit) < amount) {
                 throw Error('Not enough funds in the account')
             }
-            user.cash -= +amount
+
+            user.cash>0 ?user.cash -= +amount: user.credit -= +amount
             return user
         }
     })
@@ -138,7 +139,20 @@ const transfer = (idGiver, idReceiver , amount)=> {
     }
     saveUsers(users);
     return JSON.stringify({Giver: giver,receiver:receiver})
+}
 
+const getUserDetail=(id) => {
+    const users =getUsers();
+    const user = users.find(user => {
+        if(user.id===id) {
+            return user
+        }
+    })
+    if(!user) {
+        throw Error('User not found')
+    }
+    // return stringToJson({user:user})
+    return JSON.stringify(user)
 }
 
 module.exports ={
@@ -148,5 +162,6 @@ module.exports ={
     deposit,
     withdraw,
     addCredit,
-    transfer
+    transfer,
+    getUserDetail
 };

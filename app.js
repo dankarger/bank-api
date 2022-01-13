@@ -1,12 +1,28 @@
 const express = require('express');
 const app =express();
-const {getUsers, addUser, deleteUser, deposit, withdraw, addCredit, transfer } = require('./utils')
+const { getUsers,
+        addUser,
+        deleteUser,
+        deposit,
+        withdraw,
+        addCredit,
+        transfer,
+        getUserDetail } = require('./utils')
 
 app.use(express.json());
 
 app.get('/users',(req, res) => {
     try {
         res.status(200).send(getUsers());
+    } catch (e) {
+        res.status(400).send({ error: e.message })
+    }
+
+});
+
+app.get('/user',(req, res) => {
+    try {
+        res.status(200).send(getUserDetail(req.query.id));
     } catch (e) {
         res.status(400).send({ error: e.message })
     }
