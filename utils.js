@@ -58,22 +58,64 @@ const deleteUser=(id)=> {
     return JSON.stringify(users)
 }
 //withdraw
+const withdraw= (id, amount) => {
+    const users = getUsers();
+    if(+amount < 0) {
+        throw Error('only a positive amount is  allowed')
+    }
+
+    const user= users.find(user=>{
+        if(user.id===id){
+            if(user.credit < amount) {
+                throw Error('Not enough credits in the account')
+            }
+            user.cash -= +amount
+            return user
+        }
+    })
+    if(!user){
+        throw Error('User not found')
+    }
+    saveUsers(users)
+    return JSON.stringify(user)
+}
 
 //deposit
 const deposit=(id, amount) => {
-
     const users = getUsers();
     if(+amount < 0){
         throw Error('only a positive amount is  allowed')
     }
-
-    users.find(user=>{
+    const user = users.find(user=>{
        if(user.id===id){
            user.cash += +amount
+           return user
        }
     })
+    if(!user){
+        throw Error('User not found')
+    }
     saveUsers(users)
-    return JSON.stringify(users)
+    return JSON.stringify(user)
+}
+
+const addCredit = (id, credit) => {
+    const users=getUsers();
+    if( +credit <=0) {
+        throw Error('Amount need to be higher than 0')
+    }
+   const user = users.find(user=>{
+        if(user.id===id) {
+            user.credit += +credit
+            return user
+        }
+    })
+    if(!user){
+        throw Error('User not found')
+    }
+    saveUsers(users)
+    return JSON.stringify(user)
+
 }
 
 //transfer
@@ -83,5 +125,7 @@ module.exports ={
     getUsers,
     addUser,
     deleteUser,
-    deposit
+    deposit,
+    withdraw,
+    addCredit
 };
