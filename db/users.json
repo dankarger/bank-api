@@ -1,0 +1,39 @@
+[
+  {
+  "id": "23445672",
+    "name": {
+      "first": "booby",
+      "last": "booby"
+    },
+  "cash": 1000,
+  "credit": 1000
+},
+
+  {
+  "id": "23445672",
+  "name": {
+      "first": "booby",
+      "last": "booby"
+    },
+  "cash": "bobkkkby",
+  "credit": 10000
+},
+
+  {
+    "id": "23345627",
+      "first": "booby",
+      "last": "booby"
+    "cash": 5100,
+    "credit": 91058
+  },
+
+  {
+    "id": "62744321",
+    "name": {
+      "first": "booby",
+      "last": "deerek"
+    },
+    "cash": 1500,
+    "credit": 91058
+  }
+]
