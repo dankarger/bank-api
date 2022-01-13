@@ -7,7 +7,8 @@ const { getUsers,
         withdraw,
         addCredit,
         transfer,
-        getUserDetail } = require('./utils')
+        filterUsers,
+        getUserDetail, } = require('./utils')
 
 app.use(express.json());
 
@@ -78,6 +79,14 @@ app.put('/users/transfer',(req, res) => {
     try {
 
         res.status(200).send(transfer(req.query.idGiver,req.query.idReceiver, req.query.amount))
+    }catch (e) {
+        res.status(400).send({ error: e.message })
+    }
+})
+
+app.get('/users/filter',(req, res) => {
+    try {
+        res.status(200).send(filterUsers(req.query.type, req.query.amount))
     }catch (e) {
         res.status(400).send({ error: e.message })
     }

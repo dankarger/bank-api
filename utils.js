@@ -56,7 +56,6 @@ const withdraw= (id, amount) => {
     if(+amount < 0) {
         throw Error('only a positive amount is  allowed')
     }
-
     const user= users.find(user=>{
         if(user.id===id){
             if(user.credit < amount) {
@@ -151,10 +150,21 @@ const getUserDetail=(id) => {
     if(!user) {
         throw Error('User not found')
     }
-    // return stringToJson({user:user})
     return JSON.stringify(user)
 }
 
+const filterUsers = (type , amount) => {
+    const users=getUsers();
+    const filteredUsers = type==='above'? users.filter( user => {
+        return user.cash > +amount
+    }): users.filter(user=> {
+        return user.cash < +amount
+    })
+    if(filteredUsers.length===0) {
+        throw Error('No users found matching ')
+    }
+    return JSON.stringify(filteredUsers)
+}
 module.exports ={
     getUsers,
     addUser,
@@ -163,5 +173,6 @@ module.exports ={
     withdraw,
     addCredit,
     transfer,
-    getUserDetail
+    getUserDetail,
+    filterUsers
 };
