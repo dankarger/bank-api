@@ -13,7 +13,7 @@ const getUsers =() => {
 
 const saveUsers = (users)=> {
     const dataJson = JSON.stringify(users)
-    fs.writeFileSync('./sb/users.json',dataJson)
+    fs.writeFileSync('./db/users.json',dataJson)
 }
 
 const stringToJson = (message,string)=> {
@@ -31,8 +31,8 @@ const addUser = (body) =>{
         // const [id,name,cash,credit]=body
         const newUser = {
             id:body.id,
-            first:body.name.first,
-            last:body.name.last,
+            first:body.first,
+            last:body.last,
             cash:body.cash,
             credit:body.credit
         }
@@ -46,13 +46,42 @@ const addUser = (body) =>{
 
 //Delete
 
+const deleteUser=(id)=> {
+    const users = getUsers();
+    const updatedUsers = users.filter(user=>{
+        return user.id!==id
+    })
+    if( users.length===updatedUsers.length ) {
+        throw Error('user not found')
+    }
+    saveUsers(updatedUsers)
+    return JSON.stringify(users)
+}
 //withdraw
 
 //deposit
+const deposit=(id, amount) => {
+
+    const users = getUsers();
+    if(+amount < 0){
+        throw Error('only a positive amount is  allowed')
+    }
+
+    users.find(user=>{
+       if(user.id===id){
+           user.cash += +amount
+       }
+    })
+    saveUsers(users)
+    return JSON.stringify(users)
+}
 
 //transfer
 
 
 module.exports ={
-    getUsers,addUser
+    getUsers,
+    addUser,
+    deleteUser,
+    deposit
 };
