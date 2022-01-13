@@ -1,6 +1,6 @@
 const express = require('express');
 const app =express();
-const {getUsers, addUser, deleteUser, deposit, withdraw, addCredit } = require('./utils')
+const {getUsers, addUser, deleteUser, deposit, withdraw, addCredit, transfer } = require('./utils')
 
 app.use(express.json());
 
@@ -57,6 +57,16 @@ app.put('/users/add-credit',(req, res) => {
         res.status(400).send({ error: e.message })
     }
 })
+
+app.put('/users/transfer',(req, res) => {
+    try {
+
+        res.status(200).send(transfer(req.query.idGiver,req.query.idReceiver, req.query.amount))
+    }catch (e) {
+        res.status(400).send({ error: e.message })
+    }
+})
+
 const PORT = 3000;
 
 app.listen(PORT,() => {

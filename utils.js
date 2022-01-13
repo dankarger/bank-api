@@ -5,7 +5,6 @@ const getUsers =() => {
         const users = fs.readFileSync('./db/users.json');
         const userJSON = users.toString();
         return JSON.parse(userJSON)
-
     } catch (e) {
         return [];
     }
@@ -28,7 +27,6 @@ const addUser = (body) =>{
                 throw Error('user all ready exist')
             }
         });
-        // const [id,name,cash,credit]=body
         const newUser = {
             id:body.id,
             first:body.first,
@@ -39,12 +37,7 @@ const addUser = (body) =>{
         users.push(newUser)
         saveUsers(users)
         return stringToJson("new-client", newUser)
-    // }catch (e) {
-    //    return e.message
-    // }
 }
-
-//Delete
 
 const deleteUser=(id)=> {
     const users = getUsers();
@@ -57,7 +50,7 @@ const deleteUser=(id)=> {
     saveUsers(updatedUsers)
     return JSON.stringify(users)
 }
-//withdraw
+
 const withdraw= (id, amount) => {
     const users = getUsers();
     if(+amount < 0) {
@@ -80,7 +73,6 @@ const withdraw= (id, amount) => {
     return JSON.stringify(user)
 }
 
-//deposit
 const deposit=(id, amount) => {
     const users = getUsers();
     if(+amount < 0){
@@ -118,8 +110,36 @@ const addCredit = (id, credit) => {
 
 }
 
-//transfer
+const transfer = (idGiver, idReceiver , amount)=> {
+    if(+amount <= 0 ) {
+        throw Error(' Amount need to be higher than 0')
+    }
+    const users = getUsers();
+    const giver = users.find(user=> {
+        if(user.id===idGiver) {
+            if((user.cash + user.credit) < amount) {
+                throw Error('Not enough funds in the account')
+            }
+            user.cash -= +amount
+            return user
+        }
+    })
+    if(!giver) {
+        throw Error('The giver user not found');
+    }
+    const receiver = users.find(user=> {
+        if(user.id===idReceiver) {
+            user.cash += +amount
+            return user
+        }
+    })
+    if(!receiver) {
+        throw Error('The receiver user not found');
+    }
+    saveUsers(users);
+    return JSON.stringify({Giver: giver,receiver:receiver})
 
+}
 
 module.exports ={
     getUsers,
@@ -127,5 +147,6 @@ module.exports ={
     deleteUser,
     deposit,
     withdraw,
-    addCredit
+    addCredit,
+    transfer
 };
