@@ -39,9 +39,9 @@ const addUser = (body) =>{
         return stringToJson("new-client", newUser)
 }
 
-const deleteUser=(id)=> {
+const deleteUser= (id) => {
     const users = getUsers();
-    const updatedUsers = users.filter(user=>{
+    const updatedUsers = users.filter(user => {
         return user.id!==id
     })
     if( users.length===updatedUsers.length ) {
@@ -58,10 +58,10 @@ const withdraw= (id, amount) => {
     }
     const user= users.find(user=>{
         if(user.id===id){
-            if(user.credit < amount) {
+            if((user.credit+user.cash) < amount) {
                 throw Error('Not enough credits in the account')
             }
-            user.cash -= +amount
+            user.cash>amount ?user.cash -= +amount: user.credit -= +amount
             return user
         }
     })
@@ -119,7 +119,6 @@ const transfer = (idGiver, idReceiver , amount)=> {
             if((user.cash + user.credit) < amount) {
                 throw Error('Not enough funds in the account')
             }
-
             user.cash>0 ?user.cash -= +amount: user.credit -= +amount
             return user
         }
