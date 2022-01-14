@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>bank</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+<div class="heading">
+    <h1>User detail</h1>
+    <button>Back</button>
+</div>
+<div class="page-content">
+
+                <div class="card" onclick={selectUser({{user.id}})}>
+                    <h3>Name: <span>{{user.first}} {{this.last}}</span></h3>
+                    <h4>Id: {{user.id}}</h4>
+                    <div>
+                        <h4>Cash: <span>{{user.cash}}</span></h4>
+                        <h4>Credit: <span>{{user.credit}}</span></h4>
+                    </div>
+                    <div class="buttons-div">
+                        <button> Deposit</button>
+                        <button> Withdraw</button>
+                        <button> Transfer</button>
+                        <button> Change credit</button>
+                        <button> Delete</button>
+                    </div>
+                </div>
+</div>
+<script src="../js/main.js"></script>
+</div>
+</body>
+</html>

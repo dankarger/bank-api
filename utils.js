@@ -20,7 +20,6 @@ const stringToJson = (message,string)=> {
 }
 
 const addUser = (body) =>{
-    console.log('dfgdfg',body)
         const users = getUsers();
         users.find(user => {
             if (user.id === body.id) {
@@ -149,7 +148,7 @@ const getUserDetail=(id) => {
     if(!user) {
         throw Error('User not found')
     }
-    return JSON.stringify(user)
+    return user
 }
 
 const filterUsers = (type , amount) => {
