@@ -19,7 +19,7 @@ app.use(express.static(path.join(__dirname, '/public')));
 
 app.use(express.json());
 
-app.get('/',(req, res) => {
+app.get('',(req, res) => {
     try {
         res.status(200).render('index',{users:getUsers()});
         // res.status(200).send(getUsers()).setHeader({ headers: {
