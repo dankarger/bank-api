@@ -19,6 +19,20 @@ app.use(express.static(path.join(__dirname, '/public')));
 
 app.use(express.json());
 
+app.get('/',(req, res) => {
+    try {
+        res.status(200).render('index',{users:getUsers()});
+        // res.status(200).send(getUsers()).setHeader({ headers: {
+        //         'Content-Type': 'application/json'
+        //     }});
+    } catch (e) {
+        res.status(400).send({ error: e.message })
+    }
+
+});
+
+
+
 app.get('/users',(req, res) => {
     try {
         res.status(200).render('index',{users:getUsers()});
