@@ -31,10 +31,7 @@ app.get('',(req, res) => {
     } catch (e) {
         res.status(400).send({ error: e.message })
     }
-
 });
-
-
 
 app.get('/users',(req, res) => {
     try {
