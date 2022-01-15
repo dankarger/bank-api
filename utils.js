@@ -153,9 +153,10 @@ const transfer = (idGiver, idReceiver , amount)=> {
 }
 
 const getUserDetail=(id) => {
+    console.log('id',+id)
     const users =getUsers();
     const user = users.find(user => {
-        if(user.id===id) {
+        if(user.id===+id) {
             return user
         }
     })

@@ -19,7 +19,6 @@
 </div>
 <div class="page-content">
 
-
     <ul class="list">
 
     {{#each users}}
@@ -32,21 +31,22 @@
                     <h4>Credit: <span>{{this.credit}}</span></h4>
                 </div>
                 <div class="buttons-div">
-<!--                    <form method="GET"  >-->
-<!--                        <input class="hidden" type="text" name="id" value="{{this.id}}">-->
-                        <button onclick={selectUser({{this.id}})} type="submit" > View</button>
-<!--                    </form>-->
-<!--                    <form  action="/users" >-->
-                        <input class="hidden" type="text" name="id" value="{{this.id}}">
-                        <button type="submit" onclick={deleteUser2({{this.id}})}> Delete</button>
 
-<!--                    </form>-->
+                    <form  action="/user?id="{{this.id}} >
+                        <input class="hidden" type="text" name="id" value="{{this.id}}">
+                        <button onclick={selectUser({{this.id}})} type="submit" > View</button>
+
+                    </form>
+                    <!--                    <form method="GET"  >-->
+                    <!--                        <input class="hidden" type="text" name="id" value="{{this.id}}">-->
+                    <button type="submit" onclick={deleteUser2({{this.id}})}> Delete</button>
+
+                    <!--                    </form>-->
                     <button> Edit</button>
                 </div>
 
             </div>
         </li>
-
     {{/each}}
     </ul>
     </div>

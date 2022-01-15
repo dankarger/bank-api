@@ -1,6 +1,8 @@
 
-const deleteUser2=(id)=>{
+const deleteUser2= async (id)=>{
     alert(id)
+    // const response =await fetch('http://127.0.0.1:3000/users?id='+id)
+
     // return deleteUser(id)
 }
 const selectUser=(id) =>{
@@ -9,15 +11,14 @@ const selectUser=(id) =>{
     //     console.log(res)
     // })
     async function loadNames() {
-        const response = await fetch('http://127.0.0.1:3000/users');
-         // await response.json();
+        const response = await fetch('http://127.0.0.1:3000/user?id='+id);
         console.log(response);
         // logs [{ name: 'Joker'}, { name: 'Batman' }]
-        return response
+        return  response
     }
    const names =  loadNames();
     console.log('name',names)
-    // alert('kk')
+    alert(names)
 }
 
 // const fs=require('fs')

@@ -22,7 +22,7 @@
 </div>
 <div class="page-content">
 
-                <div class="card" onclick={selectUser({{user.id}})}>
+                <div class="card"  }>
                     <h3>Name: <span>{{user.first}} {{this.last}}</span></h3>
                     <h4>Id: {{user.id}}</h4>
                     <div>
@@ -36,7 +36,7 @@
                         <button> Change credit</button>
                         <form method="delete" action="/users">
                             <input class="hidden" type="text" name="id" value="{{this.id}}">
-                            <button onclick={deleteUser({{user.id}})}> Delete</button>
+                            <button onclick={selectUser({{user.id}})}> Delete</button>
                         </form>
 
                     </div>

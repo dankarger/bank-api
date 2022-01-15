@@ -9,18 +9,12 @@ const { getUsers,
         transfer,
         filterUsers,
         getUserDetail, } = require('./utils')
-//
-// const rootRouter = require("./routes");
-// const path = require("path");
-// const userRouter = require("./routes/user.routers");
 
 
 app.set('view engine', 'hbs')
-// import * as path from "path";
 const path = require('path')
 app.use(express.static(path.join(__dirname, '/public')));
 app.use(express.json());
-
 
 
 app.get('/users',(req, res) => {
@@ -32,12 +26,12 @@ app.get('/users',(req, res) => {
 });
 
 app.get('/user',(req, res) => {
-
+        console.log(req.query)
     try {
-        if(!req.body.id){
+        if(!req.query.id){
             return res.status(403).render('404',{title:"Invalid input --"})
         }
-        res.status(200).render('userDetail',{user:getUserDetail(req.body.id),title:"User Detail"});
+        res.status(200).header('Access-Control-Allow-Origin','*').render('userDetail',{user:getUserDetail(req.query.id),title:"User Detail"});
     } catch (e) {
         res.status(400).send({ error: e.message })
     }
