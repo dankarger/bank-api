@@ -22,7 +22,9 @@ const stringToJson = (message,string)=> {
 const addUser = (body) =>{
     console.log('ggg',body)
         const users = getUsers();
-         if(!validateInput('string',body.first))throw Error('Name input must be type of string ')
+     if(!validateInput('number',body.id))throw Error('id input must be type of number ')
+
+        if(!validateInput('string',body.first))throw Error('Name input must be type of string ')
          if(!validateInput('string',body.last))throw Error('Name input must be type of string2 ')
          if(!validateInput('number',+body.cash))throw Error('cash input must be type of number ')
          if(!validateInput('number',+body.credit))throw Error('credit input must be type of number ')
@@ -57,6 +59,8 @@ const deleteUser= (id) => {
 }
 
 const withdraw= (id, amount) => {
+    if(!validateInput('number',amount))throw Error('amount input must be type of number ')
+
     const users = getUsers();
     if(+amount < 0) {
         throw Error('only a positive amount is  allowed')
@@ -78,6 +82,7 @@ const withdraw= (id, amount) => {
 }
 
 const deposit=(id, amount) => {
+    if(!validateInput('number',amount))throw Error('amount input must be type of number ')
     const users = getUsers();
     if(+amount < 0){
         throw Error('only a positive amount is  allowed')
@@ -96,6 +101,8 @@ const deposit=(id, amount) => {
 }
 
 const addCredit = (id, credit) => {
+    if(!validateInput('number',credit))throw Error('credit input must be type of number ')
+
     const users=getUsers();
     if( +credit <=0) {
         throw Error('Amount need to be higher than 0')
@@ -114,6 +121,8 @@ const addCredit = (id, credit) => {
 }
 
 const transfer = (idGiver, idReceiver , amount)=> {
+    if(!validateInput('number',amount))throw Error('amount input must be type of number ')
+
     if(+amount <= 0 ) {
         throw Error(' Amount need to be higher than 0')
     }
@@ -170,9 +179,7 @@ const filterUsers = (type , amount) => {
 }
 
 const validateInput= (type, input)=> {
-    // console.log(typeof input,input)
     let isnum = /^\d+$/.test(input);
-    // console.log('t',isnum)
     if(type==='number') return isnum
     if(type==='string') return !isnum
     return typeof input===type

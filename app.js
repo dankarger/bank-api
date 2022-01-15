@@ -67,7 +67,7 @@ app.post('/users',(req, res) => {
 
 app.delete('/users',(req, res) => {
     try {
-        res.status(200).render('index',{users:deleteUser(req.query.id),title:"Users"})
+        res.status(200).render('index',{users:deleteUser(req.body.id),title:"Users"})
     }catch (e) {
         res.status(400).send({ error: e.message })
     }
@@ -75,8 +75,7 @@ app.delete('/users',(req, res) => {
 
 app.put('/users/deposit',(req, res) => {
     try {
-        // const[{id, amount}] = req.query
-        res.status(200).render('userDetail',{user:deposit(req.query.id, req.query.amount),title:`Deposit ${req.query.amount} to`})
+        res.status(200).render('userDetail',{user:deposit(req.body.id, req.body.amount),title:`Deposit ${req.body.amount} to`})
     }catch (e) {
         res.status(400).send({ error: e.message })
     }
@@ -85,7 +84,7 @@ app.put('/users/deposit',(req, res) => {
 app.put('/users/withdraw',(req, res) => {
     try {
         // const[{id, amount}] = req.query
-        res.status(200).render('userDetail',{user:withdraw(req.query.id, req.query.amount),title:`Withdraw ${req.query.amount} from user:`})
+        res.status(200).render('userDetail',{user:withdraw(req.body.id, req.body.amount),title:`Withdraw ${req.body.amount} from user:`})
     }catch (e) {
         res.status(400).send({ error: e.message })
     }
@@ -94,7 +93,7 @@ app.put('/users/withdraw',(req, res) => {
 app.put('/users/add-credit',(req, res) => {
     try {
         // const[{id, amount}] = req.query
-        res.status(200).render('userDetail',{user:addCredit(req.query.id, req.query.amount),title:`Add ${req.query.amount} credit to user:`})
+        res.status(200).render('userDetail',{user:addCredit(req.body.id, req.body.amount),title:`Add ${req.body.amount} credit to user:`})
     }catch (e) {
         res.status(400).send({ error: e.message })
     }
@@ -103,7 +102,7 @@ app.put('/users/add-credit',(req, res) => {
 app.put('/users/transfer',(req, res) => {
     try {
 
-        res.status(200).render('index',{users:transfer(req.query.idGiver,req.query.idReceiver, req.query.amount),title:`Transfer ${req.query.amount} from${req.query.idGiver} to ${req.query.idReceiver}`})
+        res.status(200).render('index',{users:transfer(req.query.idGiver,req.body.idReceiver, req.body.amount),title:`Transfer ${req.body.amount} from${req.body.idGiver} to ${req.body.idReceiver}`})
     }catch (e) {
         res.status(400).send({ error: e.message })
     }
