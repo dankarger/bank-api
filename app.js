@@ -9,14 +9,18 @@ const { getUsers,
         transfer,
         filterUsers,
         getUserDetail, } = require('./utils')
+//
+// const rootRouter = require("./routes");
+// const path = require("path");
+// const userRouter = require("./routes/user.routers");
+
 
 app.set('view engine', 'hbs')
 // import * as path from "path";
 const path = require('path')
-
 app.use(express.static(path.join(__dirname, '/public')));
-
 app.use(express.json());
+
 app.get('',(req, res) => {
     try {
         res.header('Access-Control-Allow-Origin', '*')
@@ -35,19 +39,15 @@ app.get('',(req, res) => {
 
 app.get('/users',(req, res) => {
     try {
-        res.status(200).render('index',{users:getUsers()});
-        // res.status(200).send(getUsers()).setHeader({ headers: {
-        //         'Content-Type': 'application/json'
-        //     }});
+        res.status(200).render('index',{users:getUsers(),title:"Bank:All Users"});
     } catch (e) {
         res.status(400).send({ error: e.message })
     }
-
 });
 
 app.get('/user',(req, res) => {
     try {
-        res.status(200).render('userDetail',{user:getUserDetail(req.query.id)});
+        res.status(200).render('userDetail',{user:getUserDetail(req.query.id),title:"User Detail"});
     } catch (e) {
         res.status(400).send({ error: e.message })
     }
@@ -58,7 +58,7 @@ app.post('/users',(req, res) => {
     try{
         console.log('params', req.query)
         console.log('params', req.body)
-        res.status(201).send(addUser(req.query))
+        res.status(201).render('userDetail',{user:addUser(req.query)})
     }catch(e){
         res.status(400).send({ error: e.message })
     }

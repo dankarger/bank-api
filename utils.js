@@ -21,7 +21,11 @@ const stringToJson = (message,string)=> {
 
 const addUser = (body) =>{
         const users = getUsers();
-        users.find(user => {
+        if(!validateInput('string',body.first))throw Error('Name input must be type of string ')
+         if(!validateInput('string',body.last))throw Error('Name input must be type of string ')
+    if(!validateInput('number',body.cash))throw Error('Name input must be type of string ')
+
+    users.find(user => {
             if (user.id === body.id) {
                 throw Error('user all ready exist')
             }
@@ -35,7 +39,7 @@ const addUser = (body) =>{
         }
         users.push(newUser)
         saveUsers(users)
-        return stringToJson("new-client", newUser)
+        return newUser
 }
 
 const deleteUser= (id) => {
@@ -163,6 +167,12 @@ const filterUsers = (type , amount) => {
     }
     return JSON.stringify(filteredUsers)
 }
+
+const validateInput= (type, input)=> {
+    return typeof input===type
+
+}
+
 module.exports ={
     getUsers,
     addUser,
