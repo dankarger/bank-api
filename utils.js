@@ -73,7 +73,7 @@ const withdraw= (id, amount) => {
         throw Error('User not found')
     }
     saveUsers(users)
-    return JSON.stringify(user)
+    return user
 }
 
 const deposit=(id, amount) => {
@@ -83,7 +83,7 @@ const deposit=(id, amount) => {
     }
     const user = users.find(user=>{
        if(user.id===id){
-           user.cash += +amount
+           user.cash = +(user.cash) + +amount
            return user
        }
     })
@@ -91,7 +91,7 @@ const deposit=(id, amount) => {
         throw Error('User not found')
     }
     saveUsers(users)
-    return JSON.stringify(user)
+    return user
 }
 
 const addCredit = (id, credit) => {
@@ -101,7 +101,7 @@ const addCredit = (id, credit) => {
     }
    const user = users.find(user=>{
         if(user.id===id) {
-            user.credit += +credit
+            user.credit = +(user.credit) + +credit
             return user
         }
     })
@@ -109,8 +109,7 @@ const addCredit = (id, credit) => {
         throw Error('User not found')
     }
     saveUsers(users)
-    return JSON.stringify(user)
-
+    return user
 }
 
 const transfer = (idGiver, idReceiver , amount)=> {
@@ -120,10 +119,10 @@ const transfer = (idGiver, idReceiver , amount)=> {
     const users = getUsers();
     const giver = users.find(user=> {
         if(user.id===idGiver) {
-            if((user.cash + user.credit) < amount) {
+            if((+user.cash + +user.credit) < +amount) {
                 throw Error('Not enough funds in the account')
             }
-            user.cash>0 ?user.cash -= +amount: user.credit -= +amount
+            +user.cash>0 ?user.cash =+user.cash - +amount: user.credit =+user.credit - +amount
             return user
         }
     })
@@ -132,7 +131,7 @@ const transfer = (idGiver, idReceiver , amount)=> {
     }
     const receiver = users.find(user=> {
         if(user.id===idReceiver) {
-            user.cash += +amount
+            user.cash =+user.cash + +amount
             return user
         }
     })
@@ -140,7 +139,7 @@ const transfer = (idGiver, idReceiver , amount)=> {
         throw Error('The receiver user not found');
     }
     saveUsers(users);
-    return JSON.stringify({Giver: giver,receiver:receiver})
+    return {Giver: giver,receiver:receiver}
 }
 
 const getUserDetail=(id) => {
@@ -159,22 +158,22 @@ const getUserDetail=(id) => {
 const filterUsers = (type , amount) => {
     const users=getUsers();
     const filteredUsers = type==='above'? users.filter( user => {
-        return user.cash > +amount
+        return +user.cash > +amount
     }): users.filter(user=> {
-        return user.cash < +amount
+        return +user.cash < +amount
     })
     if(filteredUsers.length===0) {
         throw Error('No users found matching ')
     }
-    return JSON.stringify(filteredUsers)
+    return filteredUsers
 }
 
 const validateInput= (type, input)=> {
     // console.log(typeof input,input)
     let isnum = /^\d+$/.test(input);
     // console.log('t',isnum)
-    if(type==='number') return isnumif
-    if(type==='string') return isnum
+    if(type==='number') return isnum
+    if(type==='string') return !isnum
     return typeof input===type
 
 }

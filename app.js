@@ -46,6 +46,8 @@ app.get('/users',(req, res) => {
 });
 
 app.get('/user',(req, res) => {
+    console.log('body',req.body)
+    console.log('querry',req.query)
     try {
         res.status(200).render('userDetail',{user:getUserDetail(req.query.id),title:"User Detail"});
     } catch (e) {
@@ -58,7 +60,7 @@ app.post('/users',(req, res) => {
     try{
         console.log('params', req.query)
         console.log('params', req.body)
-        res.status(201).render('userDetail',{user:addUser(req.query)})
+        res.status(201).render('userDetail',{user:addUser(req.query),title:"Added User:"})
     }catch(e){
         res.status(400).send({ error: e.message })
     }
@@ -66,7 +68,7 @@ app.post('/users',(req, res) => {
 
 app.delete('/users',(req, res) => {
     try {
-        res.status(200).send(deleteUser(req.query.id))
+        res.status(200).render('userDetail',{user:deleteUser(req.query.id),title:"Deleted user:"})
     }catch (e) {
         res.status(400).send({ error: e.message })
     }
@@ -75,7 +77,7 @@ app.delete('/users',(req, res) => {
 app.put('/users/deposit',(req, res) => {
     try {
         // const[{id, amount}] = req.query
-        res.status(200).send(deposit(req.query.id, req.query.amount))
+        res.status(200).render('userDetail',{user:deposit(req.query.id, req.query.amount),title:`Deposit ${req.query.amount} to`})
     }catch (e) {
         res.status(400).send({ error: e.message })
     }
@@ -84,7 +86,7 @@ app.put('/users/deposit',(req, res) => {
 app.put('/users/withdraw',(req, res) => {
     try {
         // const[{id, amount}] = req.query
-        res.status(200).send(withdraw(req.query.id, req.query.amount))
+        res.status(200).render('userDetail',{user:withdraw(req.query.id, req.query.amount),title:`Withdraw ${req.query.amount} from user:`})
     }catch (e) {
         res.status(400).send({ error: e.message })
     }
@@ -93,7 +95,7 @@ app.put('/users/withdraw',(req, res) => {
 app.put('/users/add-credit',(req, res) => {
     try {
         // const[{id, amount}] = req.query
-        res.status(200).send(addCredit(req.query.id, req.query.amount))
+        res.status(200).render('userDetail',{user:addCredit(req.query.id, req.query.amount),title:`Add ${req.query.amount} credit to user:`})
     }catch (e) {
         res.status(400).send({ error: e.message })
     }
@@ -102,7 +104,7 @@ app.put('/users/add-credit',(req, res) => {
 app.put('/users/transfer',(req, res) => {
     try {
 
-        res.status(200).send(transfer(req.query.idGiver,req.query.idReceiver, req.query.amount))
+        res.status(200).render('index',{users:transfer(req.query.idGiver,req.query.idReceiver, req.query.amount),title:`Transfer ${req.query.amount} from${req.query.idGiver} to ${req.query.idReceiver}`})
     }catch (e) {
         res.status(400).send({ error: e.message })
     }
@@ -110,7 +112,7 @@ app.put('/users/transfer',(req, res) => {
 
 app.get('/users/filter',(req, res) => {
     try {
-        res.status(200).send(filterUsers(req.query.type, req.query.amount))
+        res.status(200).render('index',{users:filterUsers(req.query.type, req.query.amount),title:`Filtered users: ${req.query.type} ${req.query.amount}`})
     }catch (e) {
         res.status(400).send({ error: e.message })
     }
