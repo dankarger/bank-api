@@ -19,7 +19,12 @@ app.use(express.static(path.join(__dirname, '/public')));
 app.use(express.json());
 app.get('',(req, res) => {
     try {
-        res.status(200).render('index',{users:getUsers()});
+        res.header('Access-Control-Allow-Origin', '*')
+        res.header(
+            'Access-Control-Allow-Headers',
+            'Origin, X-Requested-With, Content-Type, Accept'
+        )
+       return  res.status(200).send(JSON.stringify(getUsers()));
         // res.status(200).send(getUsers()).setHeader({ headers: {
         //         'Content-Type': 'application/json'
         //     }});
