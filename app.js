@@ -46,8 +46,7 @@ app.get('/users',(req, res) => {
 });
 
 app.get('/user',(req, res) => {
-    console.log('body',req.body)
-    console.log('querry',req.query)
+
     try {
         res.status(200).render('userDetail',{user:getUserDetail(req.query.id),title:"User Detail"});
     } catch (e) {
@@ -57,10 +56,10 @@ app.get('/user',(req, res) => {
 });
 
 app.post('/users',(req, res) => {
+    console.log(req.query)
     try{
-        console.log('params', req.query)
-        console.log('params', req.body)
-        res.status(201).render('userDetail',{user:addUser(req.query),title:"Added User:"})
+        console.log(req.body)
+        res.status(201).render('userDetail',{user:addUser(req.body),title:"Added User:"})
     }catch(e){
         res.status(400).send({ error: e.message })
     }
@@ -68,7 +67,7 @@ app.post('/users',(req, res) => {
 
 app.delete('/users',(req, res) => {
     try {
-        res.status(200).render('userDetail',{user:deleteUser(req.query.id),title:"Deleted user:"})
+        res.status(200).render('index',{users:deleteUser(req.query.id),title:"Users"})
     }catch (e) {
         res.status(400).send({ error: e.message })
     }

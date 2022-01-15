@@ -20,6 +20,7 @@ const stringToJson = (message,string)=> {
 }
 
 const addUser = (body) =>{
+    console.log('ggg',body)
         const users = getUsers();
          if(!validateInput('string',body.first))throw Error('Name input must be type of string ')
          if(!validateInput('string',body.last))throw Error('Name input must be type of string2 ')
@@ -52,7 +53,7 @@ const deleteUser= (id) => {
         throw Error('user not found')
     }
     saveUsers(updatedUsers)
-    return JSON.stringify(users)
+    return updatedUsers
 }
 
 const withdraw= (id, amount) => {
