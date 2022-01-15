@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;600;700&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
 <div class="heading">
@@ -32,8 +32,15 @@
                     <h4>Credit: <span>{{this.credit}}</span></h4>
                 </div>
                 <div class="buttons-div">
-                    <button onclick="{}"> View</button>
-                    <button> Delete</button>
+                    <form method="GET" action="/user" >
+                        <input class="hidden" type="text" name="id" value="{{this.id}}">
+                        <button type="submit" > View</button>
+                    </form>
+<!--                    <form  action="/users" >-->
+<!--                        <input class="hidden" type="text" name="id" value="{{this.id}}">-->
+                        <button onclick={deleteUser({{this.id}})}> Delete</button>
+
+<!--                    </form>-->
                     <button> Edit</button>
                 </div>
 
@@ -44,6 +51,7 @@
     </ul>
     </div>
     <script src="../js/main.js"></script>
+<script src="../utils.js"></script>
 </div>
 </body>
 </html>

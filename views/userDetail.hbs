@@ -15,7 +15,10 @@
 <body>
 <div class="heading">
     <h1>User detail</h1>
-    <button>Back</button>
+    <form action="/users">
+        <button>Back</button>
+    </form>
+
 </div>
 <div class="page-content">
 
@@ -31,11 +34,16 @@
                         <button> Withdraw</button>
                         <button> Transfer</button>
                         <button> Change credit</button>
-                        <button> Delete</button>
+                        <form method="delete" action="/users">
+                            <input class="hidden" type="text" name="id" value="{{this.id}}">
+                            <button onclick={deleteUser({{user.id}})}> Delete</button>
+                        </form>
+
                     </div>
                 </div>
 </div>
 <script src="../js/main.js"></script>
+<script src="../utils.js" type="module"></script>
 </div>
 </body>
 </html>

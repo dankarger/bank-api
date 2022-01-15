@@ -1,8 +1,50 @@
+// import fs from "fs";
+
 // const axios = require('axios')
+// const { getUsers,
+//     addUser,
+//     deleteUser,
+//     deposit,
+//     withdraw,
+//     addCredit,
+//     transfer,
+//     filterUsers,
+//     getUserDetail, } = require('../../utils')
 // import axios from "axios";
 
- const selectUser=  (id)=> {
-    console.log('id',id)
-    // const user = await axios.get(`http://127.0.0.1:3000/user?id=${id}`)
-    // console.log('user',user)
-}
+// const fs = require('fs')
+// alert('hh')
+// const selectUser=  (id)=> {
+//     console.log('id',id)
+//     // const user = await axios.get(`http://127.0.0.1:3000/user?id=${id}`)
+//     // console.log('user',user)
+// }
+
+
+//
+// const getUsers =() => {
+//     try {
+//         const users = fs.readFileSync('../../db/users.json');
+//         const userJSON = users.toString();
+//         return JSON.parse(userJSON)
+//     } catch (e) {
+//         return [];
+//     }
+// };
+
+// const deleteUser= (id) => {
+//     const users = getUsers();
+//     const updatedUsers = users.filter(user => {
+//         return user.id!==id
+//     })
+//     if( users.length===updatedUsers.length ) {
+//         throw Error('user not found')
+//     }
+//     saveUsers(updatedUsers)
+//     return JSON.stringify(users)
+// }
+//
+// const saveUsers = (users)=> {
+//     const dataJson = JSON.stringify(users)
+//     fs.writeFileSync('../../db/users.json',dataJson)
+// }

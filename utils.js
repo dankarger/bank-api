@@ -21,9 +21,10 @@ const stringToJson = (message,string)=> {
 
 const addUser = (body) =>{
         const users = getUsers();
-        if(!validateInput('string',body.first))throw Error('Name input must be type of string ')
-         if(!validateInput('string',body.last))throw Error('Name input must be type of string ')
-    if(!validateInput('number',body.cash))throw Error('Name input must be type of string ')
+         if(!validateInput('string',body.first))throw Error('Name input must be type of string ')
+         if(!validateInput('string',body.last))throw Error('Name input must be type of string2 ')
+         if(!validateInput('number',+body.cash))throw Error('cash input must be type of number ')
+         if(!validateInput('number',+body.credit))throw Error('credit input must be type of number ')
 
     users.find(user => {
             if (user.id === body.id) {
@@ -169,6 +170,11 @@ const filterUsers = (type , amount) => {
 }
 
 const validateInput= (type, input)=> {
+    // console.log(typeof input,input)
+    let isnum = /^\d+$/.test(input);
+    // console.log('t',isnum)
+    if(type==='number') return isnumif
+    if(type==='string') return isnum
     return typeof input===type
 
 }
