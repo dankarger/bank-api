@@ -21,25 +21,11 @@ const path = require('path')
 app.use(express.static(path.join(__dirname, '/public')));
 app.use(express.json());
 
-app.get('',(req, res) => {
-    try {
-        res.header('Access-Control-Allow-Origin', '*')
-        res.header(
-            'Access-Control-Allow-Headers',
-            'Origin, X-Requested-With, Content-Type, Accept'
-        )
-       return  res.status(200).send(JSON.stringify(getUsers()));
-        // res.status(200).send(getUsers()).setHeader({ headers: {
-        //         'Content-Type': 'application/json'
-        //     }});
-    } catch (e) {
-        res.status(400).send({ error: e.message })
-    }
-});
+
 
 app.get('/users',(req, res) => {
     try {
-        res.status(200).render('index',{users:getUsers(),title:"Bank:All Users"});
+        res.status(200).header('Access-Control-Allow-Origin','*').render('index',{users:getUsers(),title:"Bank:All Users"});
     } catch (e) {
         res.status(400).send({ error: e.message })
     }
@@ -48,7 +34,10 @@ app.get('/users',(req, res) => {
 app.get('/user',(req, res) => {
 
     try {
-        res.status(200).render('userDetail',{user:getUserDetail(req.query.id),title:"User Detail"});
+        if(!req.body.id){
+            return res.status(403).render('404',{title:"Invalid input --"})
+        }
+        res.status(200).render('userDetail',{user:getUserDetail(req.body.id),title:"User Detail"});
     } catch (e) {
         res.status(400).send({ error: e.message })
     }
@@ -116,6 +105,9 @@ app.get('/users/filter',(req, res) => {
     }
 })
 
+app.get('*',(req,res)=> {
+    res.status(404).render('404',{title:"Page"})
+})
 const PORT = 3000;
 
 app.listen(PORT,() => {

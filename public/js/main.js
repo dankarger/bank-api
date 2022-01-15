@@ -1,5 +1,26 @@
-// import fs from "fs";
 
+const deleteUser2=(id)=>{
+    alert(id)
+    // return deleteUser(id)
+}
+const selectUser=(id) =>{
+    console.log(id)
+    // fetch('http://127.0.0.1:3000/user',{body:JSON.stringify({"id":id})}).then(res=>{
+    //     console.log(res)
+    // })
+    async function loadNames() {
+        const response = await fetch('http://127.0.0.1:3000/users');
+         // await response.json();
+        console.log(response);
+        // logs [{ name: 'Joker'}, { name: 'Batman' }]
+        return response
+    }
+   const names =  loadNames();
+    console.log('name',names)
+    // alert('kk')
+}
+
+// const fs=require('fs')
 // const axios = require('axios')
 // const { getUsers,
 //     addUser,

@@ -1,6 +1,6 @@
 const express = require('express');
 
-const {getUsers,
+const { getUsers,
     addUser,
     deleteUser,
     deposit,

@@ -24,7 +24,7 @@
 
     {{#each users}}
         <li>
-            <div class="card" onclick={selectUser({{this.id}})}>
+            <div class="card" }>
                 <h3>Name: <span>{{this.first}} {{this.last}}</span></h3>
                 <h4>Id: {{this.id}}</h4>
                 <div>
@@ -32,13 +32,13 @@
                     <h4>Credit: <span>{{this.credit}}</span></h4>
                 </div>
                 <div class="buttons-div">
-                    <form method="GET" action="/user" >
-                        <input class="hidden" type="text" name="id" value="{{this.id}}">
-                        <button type="submit" > View</button>
-                    </form>
-<!--                    <form  action="/users" >-->
+<!--                    <form method="GET"  >-->
 <!--                        <input class="hidden" type="text" name="id" value="{{this.id}}">-->
-                        <button onclick={deleteUser({{this.id}})}> Delete</button>
+                        <button onclick={selectUser({{this.id}})} type="submit" > View</button>
+<!--                    </form>-->
+<!--                    <form  action="/users" >-->
+                        <input class="hidden" type="text" name="id" value="{{this.id}}">
+                        <button type="submit" onclick={deleteUser2({{this.id}})}> Delete</button>
 
 <!--                    </form>-->
                     <button> Edit</button>
@@ -50,8 +50,8 @@
     {{/each}}
     </ul>
     </div>
-    <script src="../js/main.js"></script>
-<script src="../utils.js"></script>
+    <script src="../js/main.js" ></script>
+<!--<script src="./utils.js" ></script>-->
 </div>
 </body>
 </html>

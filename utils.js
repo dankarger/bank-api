@@ -195,5 +195,6 @@ module.exports ={
     addCredit,
     transfer,
     getUserDetail,
-    filterUsers
+    filterUsers,
+
 };
