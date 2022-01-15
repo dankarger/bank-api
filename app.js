@@ -102,7 +102,7 @@ app.put('/users/add-credit',(req, res) => {
 app.put('/users/transfer',(req, res) => {
     try {
 
-        res.status(200).render('index',{users:transfer(req.query.idGiver,req.body.idReceiver, req.body.amount),title:`Transfer ${req.body.amount} from${req.body.idGiver} to ${req.body.idReceiver}`})
+        res.status(200).render('index',{users:transfer(req.body.idGiver,req.body.idReceiver, req.body.amount),title:`Transfer ${req.body.amount} from${req.body.idGiver} to ${req.body.idReceiver}`})
     }catch (e) {
         res.status(400).send({ error: e.message })
     }
